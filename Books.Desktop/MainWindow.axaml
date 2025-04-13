@@ -1,0 +1,74 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        x:Class="Books.Desktop.MainWindow"
+        Title="Books.Desktop">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Открыть"/>
+        </Menu>
+        
+        <Grid ColumnDefinitions="*, 3*, *"
+                    DockPanel.Dock="Top">
+            <Label Content="Поиск"
+                   Target="InputSearch"
+                   Grid.Column="0"/>
+            <TextBox x:Name="InputSearch"
+                     Grid.Column="1"/>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="2">
+                <Button x:Name="ButtonSearch"
+                        Content="Найти"/>
+                <Button x:Name="ButtonSearchClear"
+                        Content="Очистить"/>
+            </StackPanel>
+            
+        </Grid>
+        
+        <Grid ColumnDefinitions="*, 3*">
+            <ListBox x:Name="ListOfBooks"
+                     SelectionChanged="ListOfBooks_OnSelectionChanged"
+                     Grid.Column="0"/>
+            
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1">
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="ID"
+                           Target="InputID"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputID"
+                             IsReadOnly="True"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="Названия"
+                           Target="InputTitle"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputTitle"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="Автор"
+                           Target="InputAuthor"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputAuthor"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ButtonSave"
+                            Content="Сохранить"
+                            Click="ButtonSave_OnClick"/>
+                    <Button x:Name="ButtonDelete"
+                            Content="Удалить"
+                            Click="ButtonDelete_OnClick"/>
+                    <Button x:Name="ButtonClear"
+                            Content="Очистить"
+                            Click="ButtonClear_OnClick"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
