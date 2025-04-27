@@ -7,8 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <!--<ProjectReference Include="..\Books.DAL\Books.DAL.csproj" />-->
-      <ProjectReference Include="..\Books.DAL_Dapper\Books.DAL_Dapper.csproj" />
+      <PackageReference Include="Dapper" Version="2.1.66" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Books.Model\Books.Model.csproj" />
     </ItemGroup>
 
