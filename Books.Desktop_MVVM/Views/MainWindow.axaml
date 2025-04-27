@@ -1,0 +1,86 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Books.Desktop_MVVM.ViewModels"
+        
+        x:Class="Books.Desktop_MVVM.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Books.Desktop_MVVM">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Открыть"/>
+        </Menu>
+        
+        <Grid ColumnDefinitions="*, 3*, *"
+                    DockPanel.Dock="Top">
+            <Label Content="Поиск"
+                   Target="InputSearch"
+                   Grid.Column="0"/>
+            <TextBox x:Name="InputSearch"
+                     Grid.Column="1"/>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="2">
+                <Button x:Name="ButtonSearch"
+                        Content="Найти"/>
+                <Button x:Name="ButtonSearchClear"
+                        Content="Очистить"/>
+            </StackPanel>
+            
+        </Grid>
+        
+        <Grid ColumnDefinitions="*, 3*">
+            <ListBox x:Name="ListOfBooks"
+                     ItemsSource="{Binding Books}"
+                     SelectedItem="{Binding SelectedBook}"
+                     Grid.Column="0"/>
+            
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1">
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="ID"
+                           Target="InputID"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputID"
+                             IsReadOnly="True"
+                             Text="{Binding Id}"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="Названия"
+                           Target="InputTitle"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputTitle"
+                             Text="{Binding Title}"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*, 4*">
+                    <Label Content="Автор"
+                           Target="InputAuthor"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="InputAuthor"
+                             Text="{Binding Author}"
+                             Grid.Column="1"/>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ButtonSave"
+                            Content="Сохранить"
+                            Command="{Binding SaveCommand}"/>
+                    <Button x:Name="ButtonDelete"
+                            Content="Удалить"
+                            Command="{Binding DeleteCommand}"/>
+                    <Button x:Name="ButtonClear"
+                            Content="Очистить"
+                            Command="{Binding ClearCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

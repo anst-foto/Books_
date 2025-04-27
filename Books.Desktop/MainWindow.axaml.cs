@@ -10,16 +10,19 @@ namespace Books.Desktop;
 
 public partial class MainWindow : Window
 {
-    private List<Book> _books;
+    private readonly List<Book> _books;
     private readonly IService _service;
     
     public MainWindow()
     {
+        _books = [];
+        
         var connectionString = File.ReadAllText("db.config");
         _service = new Service(new SqliteDb(connectionString));
         
         InitializeComponent();
         
+        //ListOfBooks.ItemsSource = _books;
         LoadBooks();
     }
     
@@ -44,8 +47,13 @@ public partial class MainWindow : Window
         }
         else
         {
-            var book = (Book)ListOfBooks.SelectedItem!;
-            _service.UpdateBook(book);
+            var bookNew = new Book()
+            {
+                Id = int.Parse(InputID.Text),
+                Title = InputTitle.Text!,
+                Author = InputAuthor.Text!
+            };
+            _service.UpdateBook(bookNew);
         }
         
         Clear();
@@ -75,10 +83,16 @@ public partial class MainWindow : Window
 
     private void LoadBooks()
     {
-        
-        ListOfBooks.ItemsSource = null;
-        
         var books = _service.GetAllBooks();
+        
+        if (books == null) return;
+        
+        _books.Clear();
+        foreach (var book in books)
+        {
+            _books.Add(book);
+        }
+        
         ListOfBooks.ItemsSource = books;
     }
 }
